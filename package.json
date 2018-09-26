@@ -4,8 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "server": "nodemon index.js",
+    "server-prod": "NODE_ENV=production nodemon index.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client-prod": "npm install --prefix client && npm run build --prefix client",
+    "prod": "concurrently \"npm run server-prod\" \"npm run client-prod\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
