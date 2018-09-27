@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 const useBodyParser = bodyParser.json({ type: "*/*"})
 
 const mongoose = require('mongoose');
-const User = require('./models/user');
+const User = require('./models/User');
 
 mongoose.connect('mongodb://max:password0@ds053698.mlab.com:53698/signup-dev', {
     useNewUrlParser: true
