@@ -14,11 +14,7 @@ mongoose.connect('mongodb://max:password0@ds053698.mlab.com:53698/signup-dev', {
 const cors = require('cors');
 app.use(cors());
 
-app.get('/', function(req, res) {
-    res.send({
-        message: 'its a message'
-    })
-})
+
 
 
 app.get('/api/instagram', function(req, res) {
@@ -33,11 +29,11 @@ app.get('/api/instagram', function(req, res) {
 })
 
 
-app.post('/', function(req, res) {
-    res.send({
-        message: 'its a message'
-    })
-})
+// app.post('/', function(req, res) {
+//     res.send({
+//         message: 'its a message'
+//     })
+// })
 
 app.post('/api/signup', useBodyParser, function(req, res) {
     const body = req.body;
