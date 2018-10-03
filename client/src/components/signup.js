@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchMessage, signUp } from '../actions/index';
+import { fetchMessage, signUp } from '../actions';
 
 import SignupForm from './signupForm';
 
-class App extends Component {
-
-  componentDidMount() {
-    this.props.fetchMessage();
-  }
-
+class Signup extends Component {
+  
   onSignup = (fields) => {
     console.log('trying to sign up with fields: ', fields);
     this.props.signUp(fields);
@@ -32,6 +28,6 @@ function mapStateToProps(state) {
   }
 }
 
-App = connect(mapStateToProps, {fetchMessage, signUp})(App);
+Signup = connect(mapStateToProps, {fetchMessage, signUp})(Signup);
 
-export default App;
+export default Signup;
