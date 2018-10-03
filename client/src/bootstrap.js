@@ -12,14 +12,12 @@ const createStoreWithMiddleware = applyMiddleware(Thunk)(createStore);
 
 import 'bootstrap/dist/css/bootstrap.css';
 import './style/main.scss';
-import IG from './components/IG';
-
 
 function main() {
   ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
       <BrowserRouter>
-        <IG />
+        <App/>
       </BrowserRouter>
     </Provider>
     , document.querySelector('.app-wrapper'));

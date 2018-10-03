@@ -24,7 +24,7 @@ app.get('/api/instagram', function(req, res) {
     console.log(res.data);
 
     res.send({
-        data: res.data
+        data: res
     })
 })
 
