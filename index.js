@@ -14,27 +14,6 @@ mongoose.connect('mongodb://max:password0@ds053698.mlab.com:53698/signup-dev', {
 const cors = require('cors');
 app.use(cors());
 
-
-
-
-app.get('/api/instagram', function(req, res) {
-
-
-    console.log('redirect');
-    console.log(res.data);
-
-    res.send({
-        data: res
-    })
-})
-
-
-// app.post('/', function(req, res) {
-//     res.send({
-//         message: 'its a message'
-//     })
-// })
-
 app.post('/api/signup', useBodyParser, function(req, res) {
     const body = req.body;
     const email = body.email;
@@ -74,14 +53,48 @@ app.post('/api/signup', useBodyParser, function(req, res) {
     })
 })
 
+app.post('/api/signin', useBodyParser, function(req, res) {
+    const body = req.body;
+    const email = body.email;
+    const password = body.password;
 
-if(process.env.NODE_ENV === 'production') {
-    app.use(express.static(__dirname + '/client/dist/'));
-    app.get(/.*/, function (req, res) {
-        res.sendFile(__dirname + '/client/dist/index.html');
+    User.findOne({ email: email }, (err, existingUser) => {
+        if(err) { res.send(err) }
+        
+        if(existingUser) {
+            if(password == existingUser.password) {
+                // authenticated 
+                res.send({
+                    success: true,
+                    message: 'user successfuly signed in',
+                    user: existingUser
+                })
+            } else {
+                res.send({
+                    success: true,
+                    message: 'incorrect email or password'
+                })
+            }
+        } else {
+            res.send({
+                success: true,
+                message: 'incorrect email or password'
+            })
+        }
+
+
+
     })
-    console.log('prod inbound');
-  }
+})
+
+
+// if(process.env.NODE_ENV === 'production') {
+//     app.use(express.static(__dirname + '/client/dist/'));
+//     app.get(/.*/, function (req, res) {
+//         res.sendFile(__dirname + '/client/dist/index.html');
+//     })
+//     console.log('prod inbound');
+//   }
   
 
 const PORT = process.env.PORT || 5000;
